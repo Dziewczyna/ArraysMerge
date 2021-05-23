@@ -3,35 +3,37 @@ import java.util.Scanner;
 
 public class ArraysMerge {
   public static void main(String[] args) {
-    int n = 0, m = 0;
-    int[] A = new int[n];
-    int[] B = new int[m];
+    int lengthA = 0, lengthB = 0;
+    int[] arrayA = new int[lengthA];
+    int[] arrayB = new int[lengthB];
 
     try (Scanner scanner = new Scanner(System.in)) {
       System.out.print("Enter size of arrays: ");
-      n = scanner.nextInt();
-      A = new int[n];
+      lengthA = scanner.nextInt();
+      arrayA = new int[lengthA];
       System.out.println("Enter all elements of 1st array in sorted order: ");
-      for (int i = 0; i < n; i++) {
-        A[i] = scanner.nextInt();
+      for (int i = 0; i < lengthA; i++) {
+        arrayA[i] = scanner.nextInt();
       }
       // Second array
-      m = n;
-      B = new int[m];
+      lengthB = lengthA;
+      arrayB = new int[lengthB];
       System.out.println("Enter all elements of 2st array in sorted order: ");
-      for (int i = 0; i < m; i++) {
-        B[i] = scanner.nextInt();
+      for (int i = 0; i < lengthB; i++) {
+        arrayB[i] = scanner.nextInt();
       }
     } catch (InputMismatchException e) {
       System.out.println("Wrong format!");
     }
 
-    if (isSorted(A, n) & isSorted(B, m)) {
-      int[] c = mergeArrays(A, B);
-      for (int i = 0; i < (A.length + B.length); i++) {
+    if (isSorted(arrayA, lengthA) && isSorted(arrayB, lengthB)) {
+      int[] c = mergeArrays(arrayA, arrayB);
+      for (int i = 0; i < (arrayA.length + arrayB.length); i++) {
         System.out.println(c[i]);
       }
-    } else System.out.println("Array(s) is not sorted");
+    } else {
+      System.out.println("Array(s) is not sorted");
+    }
   }
 
   private static boolean isSorted(int[] a, int index) {
@@ -45,32 +47,24 @@ public class ArraysMerge {
   }
 
   private static int[] mergeArrays(int[] a, int[] b) {
-    int[] c = new int[a.length + b.length];
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while (i < a.length && j < b.length) {
-      if (a[i] < b[j]) {
-        c[k] = a[i];
-        k++;
-        i++;
+    int[] arrayR = new int[a.length + b.length];
+    int indexA = 0;
+    int indexB = 0;
+    int indexR = 0;
+    while (indexA < a.length && indexB < b.length) {
+      if (a[indexA] < b[indexB]) {
+        arrayR[indexR++] = a[indexA++];
       } else {
-        c[k] = b[j];
-        k++;
-        j++;
+        arrayR[indexR++] = b[indexB++];
       }
     }
-    while (i < a.length) {
-      c[k] = a[i];
-      k++;
-      i++;
+    while (indexA < a.length) {
+      arrayR[indexR++] = a[indexA++];
     }
-    while (j < b.length) {
-      c[k] = b[j];
-      k++;
-      j++;
+    while (indexB < b.length) {
+      arrayR[indexR++] = b[indexB++];
     }
 
-    return c;
+    return arrayR;
   }
 }
