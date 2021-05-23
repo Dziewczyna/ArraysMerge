@@ -8,7 +8,7 @@ public class ArraysMerge {
     int[] arrayB = new int[lengthB];
 
     try (Scanner scanner = new Scanner(System.in)) {
-      System.out.print("Enter size of arrays: ");
+      System.out.print("Enter size of 1st array: ");
       lengthA = scanner.nextInt();
       arrayA = new int[lengthA];
       System.out.println("Enter all elements of 1st array in sorted order: ");
@@ -16,7 +16,8 @@ public class ArraysMerge {
         arrayA[i] = scanner.nextInt();
       }
       // Second array
-      lengthB = lengthA;
+      System.out.print("Enter size of 2nd array: ");
+      lengthB = scanner.nextInt();
       arrayB = new int[lengthB];
       System.out.println("Enter all elements of 2st array in sorted order: ");
       for (int i = 0; i < lengthB; i++) {
@@ -51,10 +52,10 @@ public class ArraysMerge {
     int indexA = 0;
     int indexB = 0;
     int indexR = 0;
-    while (indexA < a.length && indexB < b.length) {
-      if (a[indexA] < b[indexB]) {
+    while (indexA < a.length || indexB < b.length) {
+      if ((indexA < a.length && indexB < b.length) && (a[indexA] < b[indexB])) {
         arrayR[indexR++] = a[indexA++];
-      } else {
+      } else if (indexB < b.length) {
         arrayR[indexR++] = b[indexB++];
       }
     }
